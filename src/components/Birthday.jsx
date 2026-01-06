@@ -1,5 +1,6 @@
 import './Birthday.css'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const Birthday = () => {
   const [birthday, setBirthday] = useState('')
@@ -58,7 +59,9 @@ const Birthday = () => {
             required
           />
           
-          <button type="submit" className="next-button">Next</button>
+          <Link to="/dashboard">
+            <button type="submit" className="next-button">Next</button>
+          </Link>
         </form>
       </div>
 
