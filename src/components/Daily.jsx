@@ -53,7 +53,7 @@ const ContentBlock = styled(Box)({
 // ฟันมี 32 ซี่ (16 บน 16 ล่าง)
 const TOOTH_POSITIONS = [
   // Upper jaw (top row) - from left to right (Right to Left, patient's perspective)
-  { id: 'U1', name: 'ฟันกรามบนขวาซี่ที่ 3 (ฟันคุดบนขวา)', top: '13%', left: '1%', width: '7%', height: '12%' },
+  { id: 'U1', name: 'ฟันกรามบนขวาซี่ที่ 3 (ฟันคุดบนขวา)', top: '39.5%', left: '5%', width: '13%', height: '8%' },
   { id: 'U2', name: 'ฟันกรามบนขวาซี่ที่ 2', top: '14%', left: '7%', width: '7%', height: '12%' },
   { id: 'U3', name: 'ฟันกรามบนขวาซี่ที่ 1', top: '16%', left: '13%', width: '7%', height: '10%' },
   { id: 'U4', name: 'ฟันกรามน้อยบนขวาซี่ที่ 2', top: '17%', left: '19%', width: '7%', height: '10%' },
@@ -93,14 +93,17 @@ const ClickableTooth = styled(Box)(({ isSelected }) => ({
   cursor: 'pointer',
   backgroundColor: isSelected ? 'rgba(255, 255, 255, 0.9)' : 'transparent',
   border: isSelected ? '2px solid rgba(255, 255, 255, 1)' : '2px solid transparent',
-  borderRadius: '4px',
-  transition: 'all 0.2s ease',
+  borderRadius: '30%',
+  transition: 'box-shadow 0.2s, background-color 0.2s, border 0.2s',
   '&:hover': {
     backgroundColor: isSelected ? 'rgba(255, 255, 255, 0.9)' : 'rgba(168, 230, 207, 0.3)',
     border: isSelected ? '2px solid rgba(255, 255, 255, 1)' : '2px solid rgba(168, 230, 207, 0.6)',
+    boxShadow: '0 4px 16px 0 rgba(26, 77, 77, 0.12), 0 2px 8px 0 rgba(168, 230, 207, 0.25)',
+    zIndex: 50,
   },
   '&:active': {
     backgroundColor: 'rgba(255, 255, 255, 0.7)',
+    boxShadow: '0 2px 8px 0 rgba(26, 77, 77, 0.10), 0 1px 4px 0 rgba(168, 230, 207, 0.18)',
   },
 }))
 
