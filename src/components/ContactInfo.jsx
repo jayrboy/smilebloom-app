@@ -4,7 +4,7 @@ import { EmailIcon, PhoneIcon } from './Icons'
 
 const ContactInfoContainer = styled(Box)(({ theme }) => ({
   position: 'absolute',
-  bottom: '30px',
+  bottom: '100px',
   left: 0,
   right: 0,
   display: 'flex',
@@ -20,30 +20,21 @@ const ContactInfoContainer = styled(Box)(({ theme }) => ({
   },
 }))
 
-const ContactItem = styled(Stack)({
-  display: 'flex',
-  alignItems: 'center',
-  gap: '10px',
-  color: 'white',
-  fontSize: '0.9rem',
-  whiteSpace: 'nowrap',
-})
-
 const ContactInfo = () => {
   return (
     <ContactInfoContainer>
-      <ContactItem direction="row" spacing={1}>
-        <EmailIcon />
-        <Typography sx={{ fontSize: { xs: '0.85rem', md: '0.9rem' }, color: 'white' }}>
-          Suchanathorn@gmail.com
-        </Typography>
-      </ContactItem>
-      <ContactItem direction="row" spacing={1}>
-        <PhoneIcon />
-        <Typography sx={{ fontSize: { xs: '0.85rem', md: '0.9rem' }, color: 'white' }}>
-          064-291-9455
-        </Typography>
-      </ContactItem>
+        <Stack direction="row" spacing={1}>
+          <EmailIcon />
+          <Typography sx={{ fontSize: { xs: '0.85rem', md: '0.9rem' }, color: 'white' }}>
+            Suchanathorn@gmail.com
+          </Typography>
+        </Stack>
+        <Stack direction="row" spacing={1}>
+          <PhoneIcon />
+          <Typography sx={{ fontSize: { xs: '0.85rem', md: '0.9rem' }, color: 'white' }}>
+            064-291-9455
+          </Typography>
+        </Stack>
     </ContactInfoContainer>
   )
 }

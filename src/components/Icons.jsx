@@ -59,17 +59,41 @@ export const ToothIcon = ({ className = "tooth-icon" }) => (
 
 export const HomeNavIcon = ({ isActive = false, className = "nav-icon" }) => {
   const Icon = isActive ? HiHome : HiOutlineHome
-  return <Icon className={className} style={{ color: 'white' }} />
+  return (
+    <Icon 
+      className={className} 
+      style={{ 
+        color: isActive ? 'white' : '#6B9B9B',
+        transition: 'color 0.3s ease'
+      }} 
+    />
+  )
 }
 
 export const DailyNavIcon = ({ isActive = false, className = "nav-icon" }) => {
   const Icon = isActive ? HiBookOpen : HiOutlineBookOpen
-  return <Icon className={className} style={{ color: 'white' }} />
+  return (
+    <Icon 
+      className={className} 
+      style={{ 
+        color: isActive ? 'white' : '#6B9B9B',
+        transition: 'color 0.3s ease'
+      }} 
+    />
+  )
 }
 
 export const FavoritesNavIcon = ({ isActive = false, className = "nav-icon" }) => {
   const Icon = isActive ? AiFillHeart : AiOutlineHeart
-  return <Icon className={className} style={{ color: 'white' }} />
+  return (
+    <Icon 
+      className={className} 
+      style={{ 
+        color: isActive ? 'white' : '#6B9B9B',
+        transition: 'color 0.3s ease'
+      }} 
+    />
+  )
 }
 
 export const EmailIcon = ({ className = "contact-icon" }) => (

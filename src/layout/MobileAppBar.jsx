@@ -12,30 +12,50 @@ const NavBar = styled(Box)({
   display: 'flex',
   justifyContent: 'space-around',
   alignItems: 'center',
-  padding: '15px 0',
-  paddingBottom: 'calc(15px + env(safe-area-inset-bottom))',
-  boxShadow: '0 -2px 10px rgba(0, 0, 0, 0.1)',
-  zIndex: 100,
+  padding: '12px 20px',
+  paddingBottom: 'calc(12px + env(safe-area-inset-bottom))',
+  boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.15)',
+  zIndex: 1000,
+  borderTop: '1px solid rgba(26, 77, 77, 0.1)',
 })
 
 const NavButton = styled(IconButton)(({ isActive }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  width: { xs: '55px', md: '60px' },
-  height: { xs: '55px', md: '60px' },
-  borderRadius: '15px',
-  backgroundColor: isActive ? '#1a4d4d' : '#E8F5E9',
+  width: { xs: '64px', md: '70px' },
+  height: { xs: '64px', md: '70px' },
+  borderRadius: '16px',
+  backgroundColor: isActive ? '#1a4d4d' : 'transparent',
   border: 'none',
-  transition: 'transform 0.2s',
+  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
   textDecoration: 'none',
+  position: 'relative',
+  '&:hover': {
+    backgroundColor: isActive ? '#1a4d4d' : 'rgba(26, 77, 77, 0.08)',
+    transform: 'translateY(-2px)',
+  },
   '&:active': {
-    transform: 'scale(0.95)',
+    transform: 'translateY(0) scale(0.95)',
   },
   '& svg': {
-    width: { xs: '24px', md: '28px' },
-    height: { xs: '24px', md: '28px' },
+    width: { xs: '28px', md: '32px' },
+    height: { xs: '28px', md: '32px' },
+    transition: 'all 0.3s ease',
   },
+  ...(isActive && {
+    '&::before': {
+      content: '""',
+      position: 'absolute',
+      top: '-8px',
+      left: '50%',
+      transform: 'translateX(-50%)',
+      width: '4px',
+      height: '4px',
+      borderRadius: '50%',
+      backgroundColor: '#1a4d4d',
+    },
+  }),
 }))
 
 const MobileAppBar = () => {
@@ -44,19 +64,28 @@ const MobileAppBar = () => {
   return (
     <NavBar>
       <Link to="/dashboard" style={{ textDecoration: 'none' }}>
-        <NavButton isActive={location.pathname === '/dashboard'}>
+        <NavButton 
+          isActive={location.pathname === '/dashboard'}
+          aria-label="Home"
+        >
           <HomeNavIcon isActive={location.pathname === '/dashboard'} />
         </NavButton>
       </Link>
       
       <Link to="/daily" style={{ textDecoration: 'none' }}>
-        <NavButton isActive={location.pathname === '/daily'}>
+        <NavButton 
+          isActive={location.pathname === '/daily'}
+          aria-label="Daily"
+        >
           <DailyNavIcon isActive={location.pathname === '/daily'} />
         </NavButton>
       </Link>
       
       <Link to="/favorites" style={{ textDecoration: 'none' }}>
-        <NavButton isActive={location.pathname === '/favorites'}>
+        <NavButton 
+          isActive={location.pathname === '/favorites'}
+          aria-label="Favorites"
+        >
           <FavoritesNavIcon isActive={location.pathname === '/favorites'} />
         </NavButton>
       </Link>

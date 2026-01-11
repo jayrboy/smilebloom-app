@@ -12,6 +12,7 @@ const DashboardContainer = styled(Box)({
   padding: 0,
   margin: 0,
   overflowX: 'hidden',
+  overflowY: 'auto',
 })
 
 const DottedBorder = styled(Box)({
