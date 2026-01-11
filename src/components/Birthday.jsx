@@ -1,9 +1,102 @@
-import './Birthday.css'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { Box, Container, Typography, Button, TextField, Stack } from '@mui/material'
+import { styled } from '@mui/material/styles'
 import DecorativeElements from './DecorativeElements'
 import HeaderSection from './HeaderSection'
 import ContactInfo from './ContactInfo'
+
+const BirthdayContainer = styled(Box)({
+  position: 'relative',
+  width: '100vw',
+  height: '100vh',
+  backgroundColor: '#1a4d4d',
+  overflow: 'hidden',
+  display: 'flex',
+  flexDirection: 'column',
+  fontFamily: 'system-ui, -apple-system, sans-serif',
+})
+
+const BirthdayContent = styled(Box)({
+  position: 'relative',
+  zIndex: 2,
+  flex: 1,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  padding: '0 20px',
+})
+
+const BirthdayForm = styled(Stack)({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  gap: '25px',
+  width: '100%',
+  maxWidth: '500px',
+})
+
+const DateInput = styled(TextField)({
+  width: '100%',
+  maxWidth: '400px',
+  '& .MuiOutlinedInput-root': {
+    backgroundColor: '#f5f5dc',
+    borderRadius: '20px',
+    padding: '20px 25px',
+    fontSize: '1.1rem',
+    color: '#1a4d4d',
+    '& fieldset': {
+      border: 'none',
+    },
+    '&:hover fieldset': {
+      border: 'none',
+    },
+    '&.Mui-focused fieldset': {
+      border: 'none',
+      boxShadow: '0 0 0 3px rgba(168, 230, 207, 0.3)',
+    },
+    '& input': {
+      color: '#1a4d4d',
+      padding: 0,
+    },
+  },
+  '@media (max-width: 768px)': {
+    '& .MuiOutlinedInput-root': {
+      padding: '18px 20px',
+      fontSize: '1rem',
+    },
+  },
+  '@media (max-width: 480px)': {
+    '& .MuiOutlinedInput-root': {
+      padding: '15px 18px',
+      fontSize: '0.95rem',
+    },
+  },
+})
+
+const NextButton = styled(Button)({
+  background: '#f5f5dc',
+  color: '#1a4d4d',
+  borderRadius: '12px',
+  padding: '15px 50px',
+  fontSize: '1.1rem',
+  fontWeight: 700,
+  textTransform: 'uppercase',
+  letterSpacing: '2px',
+  marginTop: '10px',
+  '&:hover': {
+    background: '#f5f5dc',
+    transform: 'translateY(-2px)',
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)',
+  },
+  '&:active': {
+    transform: 'translateY(0)',
+  },
+  '@media (max-width: 768px)': {
+    padding: '12px 40px',
+    fontSize: '1rem',
+  },
+})
 
 const Birthday = () => {
   const [birthday, setBirthday] = useState('')
@@ -11,37 +104,47 @@ const Birthday = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     if (birthday) {
-      // Navigate to next page or save data
       console.log('Birthday:', birthday)
     }
   }
 
   return (
-    <div className="birthday-container">
+    <BirthdayContainer>
       <DecorativeElements variant="form" />
       <HeaderSection logoVariant="birthday" />
 
-      {/* Main content */}
-      <div className="birthday-content">
-        <form onSubmit={handleSubmit} className="birthday-form">
-          <p className="instruction-text-thai">กรุณากรอกวันเดือนปีเกิดลูกของคุณ</p>
+      <BirthdayContent>
+        <BirthdayForm component="form" onSubmit={handleSubmit} spacing={3}>
+          <Typography
+            sx={{
+              fontSize: { xs: '0.9rem', sm: '1rem', md: '1.2rem' },
+              fontWeight: 400,
+              color: 'white',
+              textAlign: 'center',
+              margin: 0,
+            }}
+          >
+            กรุณากรอกวันเดือนปีเกิดลูกของคุณ
+          </Typography>
           
-          <input
+          <DateInput
             type="date"
-            className="date-input"
             value={birthday}
             onChange={(e) => setBirthday(e.target.value)}
             required
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
           
-          <Link to="/dashboard">
-            <button type="submit" className="next-button">Next</button>
+          <Link to="/dashboard" style={{ textDecoration: 'none' }}>
+            <NextButton type="submit">Next</NextButton>
           </Link>
-        </form>
-      </div>
+        </BirthdayForm>
+      </BirthdayContent>
 
       <ContactInfo />
-    </div>
+    </BirthdayContainer>
   )
 }
 

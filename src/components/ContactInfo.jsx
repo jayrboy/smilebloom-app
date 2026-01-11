@@ -1,17 +1,50 @@
+import { Box, Stack, Typography } from '@mui/material'
+import { styled } from '@mui/material/styles'
 import { EmailIcon, PhoneIcon } from './Icons'
+
+const ContactInfoContainer = styled(Box)(({ theme }) => ({
+  position: 'absolute',
+  bottom: '30px',
+  left: 0,
+  right: 0,
+  display: 'flex',
+  justifyContent: 'space-between',
+  padding: '0 40px',
+  zIndex: 2,
+  [theme.breakpoints.down('md')]: {
+    flexDirection: 'column',
+    gap: '15px',
+    bottom: '20px',
+    padding: '0 20px',
+    alignItems: 'flex-start',
+  },
+}))
+
+const ContactItem = styled(Stack)({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '10px',
+  color: 'white',
+  fontSize: '0.9rem',
+  whiteSpace: 'nowrap',
+})
 
 const ContactInfo = () => {
   return (
-    <div className="contact-info">
-      <div className="contact-item">
+    <ContactInfoContainer>
+      <ContactItem direction="row" spacing={1}>
         <EmailIcon />
-        <span>Suchanathorn@gmail.com</span>
-      </div>
-      <div className="contact-item">
+        <Typography sx={{ fontSize: { xs: '0.85rem', md: '0.9rem' }, color: 'white' }}>
+          Suchanathorn@gmail.com
+        </Typography>
+      </ContactItem>
+      <ContactItem direction="row" spacing={1}>
         <PhoneIcon />
-        <span>064-291-9455</span>
-      </div>
-    </div>
+        <Typography sx={{ fontSize: { xs: '0.85rem', md: '0.9rem' }, color: 'white' }}>
+          064-291-9455
+        </Typography>
+      </ContactItem>
+    </ContactInfoContainer>
   )
 }
 

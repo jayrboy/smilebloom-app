@@ -1,53 +1,228 @@
+import { Box, Typography, Stack } from '@mui/material'
+import { styled } from '@mui/material/styles'
 import { HeaderLogo, BookIcon, ToothIcon } from './Icons'
+
+const HeaderSectionContainer = styled(Box)({
+  position: 'relative',
+  zIndex: 2,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  padding: '30px 40px',
+  width: '100%',
+  boxSizing: 'border-box',
+  '@media (max-width: 768px)': {
+    padding: '20px',
+  },
+})
+
+const HeaderLogoContainer = styled(Box)({
+  display: 'flex',
+  alignItems: 'center',
+  '& svg': {
+    width: '50px',
+    height: '50px',
+  },
+  '@media (max-width: 768px)': {
+    '& svg': {
+      width: '40px',
+      height: '40px',
+    },
+  },
+  '@media (max-width: 480px)': {
+    '& svg': {
+      width: '35px',
+      height: '35px',
+    },
+  },
+})
+
+const BrandName = styled(Typography)({
+  position: 'absolute',
+  left: '50%',
+  transform: 'translateX(-50%)',
+  fontSize: '2rem',
+  fontWeight: 700,
+  color: 'white',
+  textTransform: 'uppercase',
+  letterSpacing: '3px',
+  margin: 0,
+  '@media (max-width: 768px)': {
+    fontSize: '1.5rem',
+  },
+  '@media (max-width: 480px)': {
+    fontSize: '1.2rem',
+    letterSpacing: '2px',
+  },
+})
+
+const AgeBubble = styled(Box)({
+  position: 'relative',
+  backgroundColor: '#a8e6cf',
+  borderRadius: '20px',
+  padding: '15px 20px',
+  margin: '-30px 20px 20px auto',
+  width: 'fit-content',
+  maxWidth: '80%',
+  zIndex: 2,
+  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    bottom: '-10px',
+    right: '30px',
+    width: 0,
+    height: 0,
+    borderLeft: '10px solid transparent',
+    borderRight: '10px solid transparent',
+    borderTop: '10px solid #a8e6cf',
+  },
+  '@media (max-width: 480px)': {
+    margin: '-25px 15px 15px auto',
+    padding: '12px 15px',
+  },
+})
 
 const HeaderSection = ({ showAgeBubble = false, age = null, logoVariant = "default" }) => {
   return (
     <>
-      <div className="header-section">
-        <div className="header-logo">
+      <HeaderSectionContainer>
+        <HeaderLogoContainer>
           <HeaderLogo variant={logoVariant} />
-        </div>
-        <h1 className="brand-name">SMILEBLOOM</h1>
-      </div>
+        </HeaderLogoContainer>
+        <BrandName>SMILEBLOOM</BrandName>
+      </HeaderSectionContainer>
       
       {showAgeBubble && age && (
-        <div className="age-bubble">
-          <p className="age-text">
+        <AgeBubble>
+          <Typography
+            sx={{
+              fontSize: { xs: '0.85rem', md: '0.95rem' },
+              color: 'white',
+              margin: 0,
+              fontFamily: "'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', cursive",
+              fontWeight: 400,
+              whiteSpace: { xs: 'normal', md: 'nowrap' },
+            }}
+          >
             ปัจจุบัน น้องอายุ : {age.years}ปี...{age.months}เดือน...{age.days}วัน
-          </p>
-        </div>
+          </Typography>
+        </AgeBubble>
       )}
     </>
   )
 }
 
+const DashboardHeaderContainer = styled(Box)({
+  position: 'relative',
+  backgroundColor: '#1a4d4d',
+  borderRadius: '0 0 30px 30px',
+  padding: '30px 20px 40px 20px',
+  marginBottom: '20px',
+  zIndex: 1,
+  '@media (max-width: 480px)': {
+    padding: '25px 15px 35px 15px',
+  },
+})
+
+const WelcomeSection = styled(Box)({
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'flex-start',
+  marginBottom: '15px',
+})
+
+const WelcomeText = styled(Box)({
+  flex: 1,
+})
+
+const WelcomeLine = styled(Typography)({
+  fontSize: '1.2rem',
+  color: 'white',
+  margin: '5px 0',
+  fontFamily: "'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', cursive",
+  fontWeight: 400,
+  '@media (max-width: 768px)': {
+    fontSize: '1rem',
+  },
+  '@media (max-width: 480px)': {
+    fontSize: '0.9rem',
+  },
+})
+
+const HeaderIcons = styled(Stack)({
+  display: 'flex',
+  flexDirection: 'row',
+  gap: '15px',
+  alignItems: 'center',
+  '@media (max-width: 768px)': {
+    gap: '10px',
+  },
+})
+
 export const DashboardHeader = ({ age = null }) => {
   return (
-    <div className="header-block">
-      <h1 className="main-title">SMILEBLOOM</h1>
+    <DashboardHeaderContainer>
+      <Typography
+        sx={{
+          fontSize: { xs: '1.3rem', sm: '1.5rem', md: '2rem' },
+          fontWeight: 700,
+          color: 'white',
+          textAlign: 'center',
+          textTransform: 'uppercase',
+          letterSpacing: '2px',
+          margin: '0 0 20px 0',
+          fontFamily: 'system-ui, -apple-system, sans-serif',
+        }}
+      >
+        SMILEBLOOM
+      </Typography>
       
-      <div className="welcome-section">
-        <div className="welcome-text">
-          <p className="welcome-line">Welcome!</p>
-          <p className="welcome-line">น้อง...และผู้ ปกครอง</p>
-        </div>
+      <WelcomeSection>
+        <WelcomeText>
+          <WelcomeLine>Welcome!</WelcomeLine>
+          <WelcomeLine>น้อง...และผู้ ปกครอง</WelcomeLine>
+        </WelcomeText>
         
-        <div className="header-icons">
-          <BookIcon />
-          <ToothIcon />
-        </div>
-      </div>
+        <HeaderIcons direction="row" spacing={1.5}>
+          <Box sx={{ '& svg': { width: { xs: '30px', md: '35px' }, height: { xs: '30px', md: '35px' } } }}>
+            <BookIcon />
+          </Box>
+          <Box sx={{ '& svg': { width: { xs: '35px', md: '40px' }, height: { xs: '35px', md: '40px' } } }}>
+            <ToothIcon />
+          </Box>
+        </HeaderIcons>
+      </WelcomeSection>
       
-      <p className="thank-you-text">ขอบคุณที่เลือก smilebloom</p>
+      <Typography
+        sx={{
+          fontSize: { xs: '0.9rem', md: '1rem' },
+          color: 'white',
+          margin: '10px 0 0 0',
+          fontFamily: "'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', cursive",
+          fontWeight: 400,
+        }}
+      >
+        ขอบคุณที่เลือก smilebloom
+      </Typography>
       
       {age && (
-        <div className="age-bubble">
-          <p className="age-text">
+        <AgeBubble sx={{ margin: '-30px 20px 20px auto' }}>
+          <Typography
+            sx={{
+              fontSize: { xs: '0.85rem', md: '0.95rem' },
+              color: 'white',
+              margin: 0,
+              fontFamily: "'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', cursive",
+              fontWeight: 400,
+              whiteSpace: { xs: 'normal', md: 'nowrap' },
+            }}
+          >
             ปัจจุบัน น้องอายุ : {age.years}ปี...{age.months}เดือน...{age.days}วัน
-          </p>
-        </div>
+          </Typography>
+        </AgeBubble>
       )}
-    </div>
+    </DashboardHeaderContainer>
   )
 }
 
