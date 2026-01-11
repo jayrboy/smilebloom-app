@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
-import { Box, Container, Typography, Button, Stack } from '@mui/material'
+import { Box, Typography, Button } from '@mui/material'
 import { styled } from '@mui/material/styles'
-import DecorativeElements from './DecorativeElements'
+import DecorativeElements from '../layout/DecorativeElements'
 import ContactInfo from './ContactInfo'
 import { HomeIcon } from './Icons'
 
@@ -97,6 +97,7 @@ const StartButton = styled(Button)({
 })
 
 const Home = () => {
+  const content = 'เว็บไซต์ที่ช่วยบันทึกการเจริญเติบโตของฟันและสุขภาพฟัน เพื่อคุณแม่และคุณหนู'
   return (
     <HomeContainer>
       <DecorativeElements variant="home" />
@@ -146,10 +147,10 @@ const Home = () => {
             padding: { xs: '0 20px', md: 0 },
           }}
         >
-          เว็บไซต์ที่ช่วยบันทึกการเจริญเติบโตของฟันและสุขภาพฟัน เพื่อคุณแม่และคุณหนู
+          {content}
         </Typography>
 
-        <Link to="/childname" style={{ textDecoration: 'none' }}>
+        <Link to="/form" style={{ textDecoration: 'none' }}>
           <StartButton>START</StartButton>
         </Link>
       </HomeContent>

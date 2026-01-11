@@ -10,7 +10,8 @@ import {
 } from 'react-icons/gi'
 import { 
   AiFillHeart,
-  AiOutlineHeart
+  AiOutlineHeart,
+  AiOutlineClose
 } from 'react-icons/ai'
 
 // Custom Logo Components (keeping SVG for custom design)
@@ -102,4 +103,8 @@ export const EmailIcon = ({ className = "contact-icon" }) => (
 
 export const PhoneIcon = ({ className = "contact-icon" }) => (
   <MdOutlinePhone className={className} style={{ color: 'white' }} />
+)
+
+export const CloseIcon = ({ className = "close-icon" }) => (
+  <AiOutlineClose className={className} style={{ color: 'white' }} />
 )

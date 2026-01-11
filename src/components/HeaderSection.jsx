@@ -61,9 +61,8 @@ const AgeBubble = styled(Box)({
   backgroundColor: '#a8e6cf',
   borderRadius: '20px',
   padding: '15px 20px',
-  margin: '-30px 20px 20px auto',
   width: 'fit-content',
-  maxWidth: '80%',
+  maxWidth: '100%',
   zIndex: 2,
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
   '&::before': {
@@ -78,7 +77,6 @@ const AgeBubble = styled(Box)({
     borderTop: '10px solid #a8e6cf',
   },
   '@media (max-width: 480px)': {
-    margin: '-25px 15px 15px auto',
     padding: '12px 15px',
   },
 })
@@ -116,12 +114,13 @@ const HeaderSection = ({ showAgeBubble = false, age = null, logoVariant = "defau
 const DashboardHeaderContainer = styled(Box)({
   position: 'relative',
   backgroundColor: '#1a4d4d',
-  borderRadius: '0 0 30px 30px',
-  padding: '30px 20px 40px 20px',
+  padding: '30px 20px 50px 20px',
   marginBottom: '20px',
   zIndex: 1,
+  borderRadius: '0 0 30px 30px',
   '@media (max-width: 480px)': {
-    padding: '25px 15px 35px 15px',
+    padding: '25px 15px 45px 15px',
+    borderRadius: '0 0 25px 25px',
   },
 })
 
@@ -194,34 +193,48 @@ export const DashboardHeader = ({ age = null }) => {
         </HeaderIcons>
       </WelcomeSection>
       
-      <Typography
-        sx={{
-          fontSize: { xs: '0.9rem', md: '1rem' },
-          color: 'white',
-          margin: '10px 0 0 0',
-          fontFamily: "'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', cursive",
-          fontWeight: 400,
-        }}
-      >
-        ขอบคุณที่เลือก smilebloom
-      </Typography>
-      
-      {age && (
-        <AgeBubble sx={{ margin: '-30px 20px 20px auto' }}>
+      <Box sx={{ position: 'relative', zIndex: 2, marginTop: '10px' }}>
+        <Box sx={{ 
+          display: 'flex', 
+          flexDirection: { xs: 'column', md: 'row' },
+          alignItems: { xs: 'flex-start', md: 'flex-end' },
+          justifyContent: 'space-between',
+          gap: { xs: '10px', md: '15px' },
+        }}>
           <Typography
             sx={{
-              fontSize: { xs: '0.85rem', md: '0.95rem' },
+              fontSize: { xs: '0.9rem', md: '1rem' },
               color: 'white',
               margin: 0,
               fontFamily: "'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', cursive",
               fontWeight: 400,
-              whiteSpace: { xs: 'normal', md: 'nowrap' },
+              flex: { xs: '1 1 auto', md: '0 1 auto' },
             }}
           >
-            ปัจจุบัน น้องอายุ : {age.years}ปี...{age.months}เดือน...{age.days}วัน
+            ขอบคุณที่เลือก smilebloom
           </Typography>
-        </AgeBubble>
-      )}
+          
+          {age && (
+            <AgeBubble sx={{ 
+              margin: 0,
+              alignSelf: { xs: 'flex-end', md: 'flex-end' },
+            }}>
+              <Typography
+                sx={{
+                  fontSize: { xs: '0.85rem', md: '0.95rem' },
+                  color: 'white',
+                  margin: 0,
+                  fontFamily: "'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', cursive",
+                  fontWeight: 400,
+                  whiteSpace: { xs: 'normal', md: 'nowrap' },
+                }}
+              >
+                ปัจจุบัน น้องอายุ : {age.years}ปี...{age.months}เดือน...{age.days}วัน
+              </Typography>
+            </AgeBubble>
+          )}
+        </Box>
+      </Box>
     </DashboardHeaderContainer>
   )
 }
