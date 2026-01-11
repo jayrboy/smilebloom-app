@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Box, Typography, TextField, Button, Paper } from '@mui/material'
 import { styled } from '@mui/material/styles'
-import { DashboardHeader } from './HeaderSection'
+import { HeaderSection } from './HeaderSection'
 import MobileAppBar from '../layout/MobileAppBar'
 import { getCurrentUser } from '../utils/localStorage'
 import tooths from '../assets/tooths.png'
@@ -34,7 +34,6 @@ const ContentBlock = styled(Box)({
   borderRadius: '25px',
   padding: '25px 20px',
   margin: '20px',
-  marginBottom: '100px',
   minHeight: '300px',
   '@media (max-width: 768px)': {
     margin: '15px',
@@ -303,7 +302,7 @@ const Daily = () => {
       <DottedBorder sx={{ top: 0 }} />
       <DottedBorder sx={{ bottom: 0 }} />
 
-      <DashboardHeader userName={user?.name} />
+      <HeaderSection />
 
       <ContentBlock>
         <Typography

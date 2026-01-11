@@ -45,7 +45,7 @@ const ContentBlock = styled(Box)({
   },
   '@media (max-width: 480px)': {
     margin: '10px',
-    marginBottom: '90px',
+    marginBottom: '45px',
     padding: '20px 15px',
   },
 })
@@ -131,9 +131,53 @@ const EmptyStateText = styled(Typography)({
   marginTop: '10px',
 })
 
+const AppointmentCard = styled(Box)({
+  backgroundColor: '#1a4d4d',
+  borderRadius: '20px',
+  padding: '20px',
+  marginTop: '15px',
+  textAlign: 'center',
+  '@media (max-width: 480px)': {
+    padding: '15px',
+  },
+})
+
+const AppointmentTitle = styled(Typography)({
+  fontSize: '1.1rem',
+  color: 'white',
+  fontWeight: 400,
+  fontFamily: "'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', cursive",
+  marginBottom: '10px',
+  '@media (max-width: 480px)': {
+    fontSize: '1rem',
+  },
+})
+
+const AppointmentSubtitle = styled(Typography)({
+  fontSize: '0.95rem',
+  color: 'white',
+  fontFamily: "'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', cursive",
+  marginBottom: '8px',
+  '@media (max-width: 480px)': {
+    fontSize: '0.85rem',
+  },
+})
+
+const AppointmentDays = styled(Typography)({
+  fontSize: '1.3rem',
+  color: 'white',
+  fontWeight: 600,
+  fontFamily: "'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', cursive",
+  marginTop: '10px',
+  '@media (max-width: 480px)': {
+    fontSize: '1.1rem',
+  },
+})
+
 const Favorites = () => {
   const [user, setUser] = useState(null)
   const [favorites, setFavorites] = useState([])
+  const [nextAppointment, setNextAppointment] = useState(null)
 
   useEffect(() => {
     const loadData = () => {
@@ -170,6 +214,73 @@ const Favorites = () => {
         ]
         setFavorites(sampleFavorites)
         localStorage.setItem('favorites', JSON.stringify(sampleFavorites))
+      }
+
+      // Load tooth data and find next appointments
+      const savedToothData = localStorage.getItem('toothData')
+      if (savedToothData) {
+        try {
+          const toothData = JSON.parse(savedToothData)
+          const appointments = []
+          
+          // Extract appointment dates from tooth data
+          Object.keys(toothData).forEach((toothId) => {
+            const tooth = toothData[toothId]
+            // Check for nextAppointmentDate field
+            if (tooth.nextAppointmentDate) {
+              appointments.push({
+                date: tooth.nextAppointmentDate,
+                toothId: toothId,
+                toothName: tooth.toothNumber || toothId,
+                notes: tooth.notes || '',
+              })
+            }
+            // Also check eruptionDate + 6 months as potential next appointment
+            else if (tooth.eruptionDate) {
+              const eruptionDate = new Date(tooth.eruptionDate)
+              const nextApptDate = new Date(eruptionDate)
+              nextApptDate.setMonth(nextApptDate.getMonth() + 6)
+              appointments.push({
+                date: nextApptDate.toISOString().split('T')[0],
+                toothId: toothId,
+                toothName: tooth.toothNumber || toothId,
+                notes: tooth.notes || '',
+                isCalculated: true,
+              })
+            }
+          })
+
+          // Find all future appointments
+          const today = new Date()
+          today.setHours(0, 0, 0, 0)
+          
+          const futureAppointments = appointments
+            .map(apt => ({
+              ...apt,
+              dateObj: new Date(apt.date),
+            }))
+            .filter(apt => apt.dateObj >= today)
+            .sort((a, b) => a.dateObj - b.dateObj)
+            .map(apt => {
+              const daysDiff = Math.ceil((apt.dateObj - today) / (1000 * 60 * 60 * 24))
+              return {
+                ...apt,
+                daysLeft: daysDiff,
+              }
+            })
+
+          if (futureAppointments.length > 0) {
+            // เก็บเฉพาะนัดที่ใกล้ที่สุด (รายการแรก)
+            setNextAppointment(futureAppointments[0])
+          } else {
+            setNextAppointment(null)
+          }
+        } catch (e) {
+          console.error('Error loading tooth data:', e)
+          setNextAppointment(null)
+        }
+      } else {
+        setNextAppointment(null)
       }
     }
     
@@ -255,6 +366,42 @@ const Favorites = () => {
           </EmptyState>
         )}
       </ContentBlock>
+
+      {/* รายการนัดครั้งถัดไปจากข้อมูลฟัน ที่อยู่ใน localStorage: toothData */}
+      {nextAppointment && (
+        <ContentBlock>
+          <AppointmentCard>
+            <AppointmentTitle>Dentist day</AppointmentTitle>
+            <AppointmentSubtitle>นัดครั้งต่อไป :</AppointmentSubtitle>
+            {nextAppointment.daysLeft > 0 ? (
+              <AppointmentSubtitle>
+                ใกล้เวลานัดแล้ว! อีก {nextAppointment.daysLeft} วัน
+              </AppointmentSubtitle>
+            ) : (
+              <AppointmentSubtitle>
+                วันนี้เป็นวันนัด!
+              </AppointmentSubtitle>
+            )}
+            {nextAppointment.toothName && (
+              <AppointmentDays>
+                ฟันซี่: {nextAppointment.toothName}
+              </AppointmentDays>
+            )}
+            <AppointmentSubtitle sx={{ marginTop: '10px', opacity: 0.9 }}>
+              {new Date(nextAppointment.date).toLocaleDateString('th-TH', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}
+            </AppointmentSubtitle>
+            {nextAppointment.notes && (
+              <AppointmentSubtitle sx={{ marginTop: '8px', opacity: 0.8, fontSize: '0.85rem' }}>
+                หมายเหตุ: {nextAppointment.notes}
+              </AppointmentSubtitle>
+            )}
+          </AppointmentCard>
+        </ContentBlock>
+      )}
 
       <MobileAppBar />
     </DashboardContainer>
