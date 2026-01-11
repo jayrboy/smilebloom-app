@@ -54,21 +54,21 @@ const ContentBlock = styled(Box)({
 const TOOTH_POSITIONS = [
   // Upper jaw (top row) - from left to right (Right to Left, patient's perspective)
   { id: 'U1', name: 'ฟันกรามบนขวาซี่ที่ 3 (ฟันคุดบนขวา)', top: '39.5%', left: '5%', width: '13%', height: '8%' },
-  { id: 'U2', name: 'ฟันกรามบนขวาซี่ที่ 2', top: '14%', left: '7%', width: '7%', height: '12%' },
-  { id: 'U3', name: 'ฟันกรามบนขวาซี่ที่ 1', top: '16%', left: '13%', width: '7%', height: '10%' },
-  { id: 'U4', name: 'ฟันกรามน้อยบนขวาซี่ที่ 2', top: '17%', left: '19%', width: '7%', height: '10%' },
-  { id: 'U5', name: 'ฟันกรามน้อยบนขวาซี่ที่ 1', top: '19%', left: '24%', width: '7%', height: '9%' },
-  { id: 'U6', name: 'ฟันเขี้ยวบนขวา', top: '20%', left: '30%', width: '6%', height: '8%' },
-  { id: 'U7', name: 'ฟันตัดบนขวาซี่ที่ 2', top: '21%', left: '36%', width: '5%', height: '7%' },
-  { id: 'U8', name: 'ฟันตัดบนขวาซี่ที่ 1', top: '22%', left: '41%', width: '5%', height: '7%' },
-  { id: 'U9', name: 'ฟันตัดบนซ้ายซี่ที่ 1', top: '22%', left: '48%', width: '5%', height: '7%' },
-  { id: 'U10', name: 'ฟันตัดบนซ้ายซี่ที่ 2', top: '21%', left: '53%', width: '5%', height: '7%' },
-  { id: 'U11', name: 'ฟันเขี้ยวบนซ้าย', top: '20%', left: '58%', width: '6%', height: '8%' },
-  { id: 'U12', name: 'ฟันกรามน้อยบนซ้ายซี่ที่ 1', top: '19%', left: '64%', width: '7%', height: '9%' },
-  { id: 'U13', name: 'ฟันกรามน้อยบนซ้ายซี่ที่ 2', top: '17%', left: '69%', width: '7%', height: '10%' },
-  { id: 'U14', name: 'ฟันกรามบนซ้ายซี่ที่ 1', top: '16%', left: '75%', width: '7%', height: '10%' },
-  { id: 'U15', name: 'ฟันกรามบนซ้ายซี่ที่ 2', top: '14%', left: '82%', width: '7%', height: '12%' },
-  { id: 'U16', name: 'ฟันกรามบนซ้ายซี่ที่ 3 (ฟันคุดบนซ้าย)', top: '13%', left: '88%', width: '7%', height: '12%' },
+  { id: 'U2', name: 'ฟันกรามบนขวาซี่ที่ 2', top: '33%', left: '6%', width: '13%', height: '6.5%' },
+  { id: 'U3', name: 'ฟันกรามบนขวาซี่ที่ 1', top: '25.8%', left: '8%', width: '11.5%', height: '7.5%' },
+  { id: 'U4', name: 'ฟันกรามน้อยบนขวาซี่ที่ 2', top: '19%', left: '10.5%', width: '11.5%', height: '7.5%' },
+  { id: 'U5', name: 'ฟันกรามน้อยบนขวาซี่ที่ 1', top: '13%', left: '14%', width: '12%', height: '7%' },
+  { id: 'U6', name: 'ฟันเขี้ยวบนขวา', top: '7%', left: '20%', width: '12%', height: '8%' },
+  { id: 'U7', name: 'ฟันตัดบนขวาซี่ที่ 2', top: '4%', left: '29%', width: '11%', height: '8%' },
+  { id: 'U8', name: 'ฟันตัดบนขวาซี่ที่ 1', top: '1%', left: '39%', width: '12%', height: '10%' },
+  { id: 'U9', name: 'ฟันตัดบนซ้ายซี่ที่ 1', top: '1%', left: '50%', width: '12%', height: '10%' },
+  { id: 'U10', name: 'ฟันตัดบนซ้ายซี่ที่ 2', top: '3%', left: '62%', width: '10.5%', height: '9%' },
+  { id: 'U11', name: 'ฟันเขี้ยวบนซ้าย', top: '7.5%', left: '70%', width: '11%', height: '8%' },
+  { id: 'U12', name: 'ฟันกรามน้อยบนซ้ายซี่ที่ 1', top: '13%', left: '75.5%', width: '12%', height: '7.5%' },
+  { id: 'U13', name: 'ฟันกรามน้อยบนซ้ายซี่ที่ 2', top: '20%', left: '80%', width: '11%', height: '7%' },
+  { id: 'U14', name: 'ฟันกรามบนซ้ายซี่ที่ 1', top: '27%', left: '82%', width: '12%', height: '8%' },
+  { id: 'U15', name: 'ฟันกรามบนซ้ายซี่ที่ 2', top: '34%', left: '83%', width: '12.5%', height: '8%' },
+  { id: 'U16', name: 'ฟันกรามบนซ้ายซี่ที่ 3 (ฟันคุดบนซ้าย)', top: '41%', left: '83%', width: '13%', height: '7%' },
   // Lower jaw (bottom row) - from left to right (Left to Right, patient's perspective)
   { id: 'L1', name: 'ฟันกรามล่างซ้ายซี่ที่ 3 (ฟันคุดล่างซ้าย)', top: '63%', left: '1%', width: '7%', height: '12%' },
   { id: 'L2', name: 'ฟันกรามล่างซ้ายซี่ที่ 2', top: '64%', left: '7%', width: '7%', height: '12%' },
@@ -88,24 +88,69 @@ const TOOTH_POSITIONS = [
   { id: 'L16', name: 'ฟันกรามล่างขวาซี่ที่ 3 (ฟันคุดล่างขวา)', top: '63%', left: '88%', width: '7%', height: '12%' },
 ]
 
-const ClickableTooth = styled(Box)(({ isSelected }) => ({
-  position: 'absolute',
-  cursor: 'pointer',
-  backgroundColor: isSelected ? 'rgba(255, 255, 255, 0.9)' : 'transparent',
-  border: isSelected ? '2px solid rgba(255, 255, 255, 1)' : '2px solid transparent',
-  borderRadius: '30%',
-  transition: 'box-shadow 0.2s, background-color 0.2s, border 0.2s',
-  '&:hover': {
-    backgroundColor: isSelected ? 'rgba(255, 255, 255, 0.9)' : 'rgba(168, 230, 207, 0.3)',
-    border: isSelected ? '2px solid rgba(255, 255, 255, 1)' : '2px solid rgba(168, 230, 207, 0.6)',
-    boxShadow: '0 4px 16px 0 rgba(26, 77, 77, 0.12), 0 2px 8px 0 rgba(168, 230, 207, 0.25)',
-    zIndex: 50,
-  },
-  '&:active': {
-    backgroundColor: 'rgba(255, 255, 255, 0.7)',
-    boxShadow: '0 2px 8px 0 rgba(26, 77, 77, 0.10), 0 1px 4px 0 rgba(168, 230, 207, 0.18)',
-  },
-}))
+const ClickableTooth = styled(Box)(({ isSelected, hasData }) => {
+  // ถ้ามีข้อมูล ให้แสดงเป็นสีขาว solid
+  if (hasData) {
+    return {
+      position: 'absolute',
+      cursor: 'pointer',
+      backgroundColor: 'rgba(255, 255, 255, 0.9)',
+      border: '2px solid rgba(255, 255, 255, 1)',
+      borderRadius: '30%',
+      transition: 'box-shadow 0.2s, background-color 0.2s, border 0.2s',
+      '&:hover': {
+        backgroundColor: 'rgba(255, 255, 255, 0.95)',
+        border: '2px solid rgba(255, 255, 255, 1)',
+        boxShadow: '0 4px 16px 0 rgba(26, 77, 77, 0.12), 0 2px 8px 0 rgba(168, 230, 207, 0.25)',
+        zIndex: 50,
+      },
+      '&:active': {
+        backgroundColor: 'rgba(255, 255, 255, 0.8)',
+        boxShadow: '0 2px 8px 0 rgba(26, 77, 77, 0.10), 0 1px 4px 0 rgba(168, 230, 207, 0.18)',
+      },
+    }
+  }
+  // ถ้าถูกเลือก (แต่ยังไม่มีข้อมูล)
+  if (isSelected) {
+    return {
+      position: 'absolute',
+      cursor: 'pointer',
+      backgroundColor: 'rgba(255, 255, 255, 0.7)',
+      border: '2px solid rgba(255, 255, 255, 1)',
+      borderRadius: '30%',
+      transition: 'box-shadow 0.2s, background-color 0.2s, border 0.2s',
+      '&:hover': {
+        backgroundColor: 'rgba(255, 255, 255, 0.8)',
+        border: '2px solid rgba(255, 255, 255, 1)',
+        boxShadow: '0 4px 16px 0 rgba(26, 77, 77, 0.12), 0 2px 8px 0 rgba(168, 230, 207, 0.25)',
+        zIndex: 50,
+      },
+      '&:active': {
+        backgroundColor: 'rgba(255, 255, 255, 0.6)',
+        boxShadow: '0 2px 8px 0 rgba(26, 77, 77, 0.10), 0 1px 4px 0 rgba(168, 230, 207, 0.18)',
+      },
+    }
+  }
+  // ยังไม่มีข้อมูลและไม่ได้เลือก
+  return {
+    position: 'absolute',
+    cursor: 'pointer',
+    backgroundColor: 'transparent',
+    border: '2px solid transparent',
+    borderRadius: '30%',
+    transition: 'box-shadow 0.2s, background-color 0.2s, border 0.2s',
+    '&:hover': {
+      backgroundColor: 'rgba(168, 230, 207, 0.3)',
+      border: '2px solid rgba(168, 230, 207, 0.6)',
+      boxShadow: '0 4px 16px 0 rgba(26, 77, 77, 0.12), 0 2px 8px 0 rgba(168, 230, 207, 0.25)',
+      zIndex: 50,
+    },
+    '&:active': {
+      backgroundColor: 'rgba(255, 255, 255, 0.5)',
+      boxShadow: '0 2px 8px 0 rgba(26, 77, 77, 0.10), 0 1px 4px 0 rgba(168, 230, 207, 0.18)',
+    },
+  }
+})
 
 const SpeechBubble = styled(Paper)(({ position }) => ({
   position: 'absolute',
@@ -306,20 +351,30 @@ const Daily = () => {
                 pointerEvents: 'none',
               }}
             />
-            {TOOTH_POSITIONS.map((tooth) => (
-              <ClickableTooth
-                key={tooth.id}
-                isSelected={selectedTooth?.id === tooth.id}
-                onClick={(e) => handleToothClick(tooth, e)}
-                sx={{
-                  top: tooth.top,
-                  left: tooth.left,
-                  width: tooth.width,
-                  height: tooth.height,
-                }}
-                title={tooth.name}
-              />
-            ))}
+            {TOOTH_POSITIONS.map((tooth) => {
+              // ตรวจสอบว่าฟันซี่นี้มีข้อมูลใน localStorage หรือไม่
+              const toothInfo = toothData[tooth.id]
+              const hasData = toothInfo && (
+                toothInfo.eruptionDate || 
+                toothInfo.notes
+              )
+              
+              return (
+                <ClickableTooth
+                  key={tooth.id}
+                  isSelected={selectedTooth?.id === tooth.id}
+                  hasData={hasData}
+                  onClick={(e) => handleToothClick(tooth, e)}
+                  sx={{
+                    top: tooth.top,
+                    left: tooth.left,
+                    width: tooth.width,
+                    height: tooth.height,
+                  }}
+                  title={tooth.name}
+                />
+              )
+            })}
             
             {selectedTooth && (
               <Box
