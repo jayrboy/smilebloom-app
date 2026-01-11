@@ -1,7 +1,9 @@
+import { useState, useEffect } from 'react'
 import { Box, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import { DashboardHeader } from './HeaderSection'
 import MobileAppBar from '../layout/MobileAppBar'
+import { getCurrentUser } from '../utils/localStorage'
 
 const DashboardContainer = styled(Box)({
   position: 'relative',
@@ -46,12 +48,21 @@ const ContentBlock = styled(Box)({
 })
 
 const Favorites = () => {
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    const currentUser = getCurrentUser()
+    if (currentUser) {
+      setUser(currentUser)
+    }
+  }, [])
+
   return (
     <DashboardContainer>
       <DottedBorder sx={{ top: 0 }} />
       <DottedBorder sx={{ bottom: 0 }} />
 
-      <DashboardHeader />
+      <DashboardHeader userName={user?.name} />
 
       <ContentBlock>
         <Typography

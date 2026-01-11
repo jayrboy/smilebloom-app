@@ -161,7 +161,7 @@ const HeaderIcons = styled(Stack)({
   },
 })
 
-export const DashboardHeader = ({ age = null }) => {
+export const DashboardHeader = ({ age = null, userName = null }) => {
   const [openIntro, setOpenIntro] = useState(false)
 
   const handleOpenIntro = () => {
@@ -171,6 +171,8 @@ export const DashboardHeader = ({ age = null }) => {
   const handleCloseIntro = () => {
     setOpenIntro(false)
   }
+
+  const displayName = userName ? `น้อง ${userName} และผู้ปกครอง` : 'น้อง...และผู้ ปกครอง'
 
   return (
     <>
@@ -193,7 +195,7 @@ export const DashboardHeader = ({ age = null }) => {
         <WelcomeSection>
           <WelcomeText>
             <WelcomeLine>Welcome!</WelcomeLine>
-            <WelcomeLine>น้อง...และผู้ ปกครอง</WelcomeLine>
+            <WelcomeLine>{displayName}</WelcomeLine>
           </WelcomeText>
           
           <HeaderIcons direction="row" spacing={1.5}>

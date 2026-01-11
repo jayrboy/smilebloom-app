@@ -14,6 +14,7 @@ import { styled } from '@mui/material/styles'
 import DecorativeElements from '../layout/DecorativeElements'
 import { HeaderSection } from './HeaderSection'
 import ContactInfo from './ContactInfo'
+import { addUser } from '../utils/localStorage'
 
 const FormContainer = styled(Box)({
   position: 'fixed',
@@ -194,14 +195,13 @@ const Form = () => {
     e.preventDefault()
     
     if (validateForm()) {
-      const payload = {
+      const userData = {
         name: formData.name.trim(),
         birthday: formData.birthday,
-        createdAt: new Date().toISOString(),
       }
 
-      // save in local storage
-      localStorage.setItem('users', JSON.stringify(payload))
+      // Save user using utils
+      addUser(userData)
       
       navigate('/dashboard')
     }

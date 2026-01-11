@@ -1,7 +1,9 @@
+import { useState, useEffect } from 'react'
 import { Box, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import { DashboardHeader } from './HeaderSection'
 import MobileAppBar from '../layout/MobileAppBar'
+import { getCurrentUser } from '../utils/localStorage'
 
 const DashboardContainer = styled(Box)({
   position: 'relative',
@@ -45,19 +47,48 @@ const ContentBlock = styled(Box)({
   },
 })
 
-const Dashboard = () => {
-  const age = {
-    years: 6,
-    months: 6,
-    days: 27
+const calculateAge = (birthday) => {
+  if (!birthday) return { years: 0, months: 0, days: 0 }
+
+  const birthDate = new Date(birthday)
+  const today = new Date()
+  let years = today.getFullYear() - birthDate.getFullYear()
+  let months = today.getMonth() - birthDate.getMonth()
+  let days = today.getDate() - birthDate.getDate()
+  
+  if (days < 0) {
+    months--
+    const lastMonth = new Date(today.getFullYear(), today.getMonth(), 0)
+    days += lastMonth.getDate()
   }
+  
+  if (months < 0) {
+    years--
+    months += 12
+  }
+  
+  return { years, months, days }
+}
+
+const Dashboard = () => {
+  const [user, setUser] = useState()
+  const [age, setAge] = useState()
+
+  useEffect(() => {
+    const currentUser = getCurrentUser()
+    if (currentUser) {
+      setUser(currentUser)
+    }
+    const calculatedAge = calculateAge(currentUser.birthday)
+    setAge(calculatedAge)
+  }, [])
 
   return (
     <DashboardContainer>
       <DottedBorder sx={{ top: 0 }} />
       <DottedBorder sx={{ bottom: 0 }} />
 
-      <DashboardHeader age={age} />
+      <DashboardHeader age={age} userName={user?.name} />
 
       <ContentBlock>
         <Typography
