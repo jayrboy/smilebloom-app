@@ -1,4 +1,3 @@
-import fs from 'fs'
 import { useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { 
@@ -13,7 +12,7 @@ import {
 } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import DecorativeElements from '../layout/DecorativeElements'
-import HeaderSection from './HeaderSection'
+import { HeaderSection } from './HeaderSection'
 import ContactInfo from './ContactInfo'
 
 const FormContainer = styled(Box)({

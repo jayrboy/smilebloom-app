@@ -1,6 +1,8 @@
-import { Box, Typography, Stack } from '@mui/material'
+import { useState } from 'react'
+import { Box, Typography, Stack, Dialog, IconButton } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import { HeaderLogo, BookIcon, ToothIcon } from './Icons'
+import Intro from './Intro'
 
 const HeaderSectionContainer = styled(Box)({
   position: 'relative',
@@ -81,7 +83,7 @@ const AgeBubble = styled(Box)({
   },
 })
 
-const HeaderSection = ({ showAgeBubble = false, age = null, logoVariant = "default" }) => {
+export const HeaderSection = ({ showAgeBubble = false, age = null, logoVariant = "default" }) => {
   return (
     <>
       <HeaderSectionContainer>
@@ -160,38 +162,75 @@ const HeaderIcons = styled(Stack)({
 })
 
 export const DashboardHeader = ({ age = null }) => {
+  const [openIntro, setOpenIntro] = useState(false)
+
+  const handleOpenIntro = () => {
+    setOpenIntro(true)
+  }
+
+  const handleCloseIntro = () => {
+    setOpenIntro(false)
+  }
+
   return (
-    <DashboardHeaderContainer>
-      <Typography
-        sx={{
-          fontSize: { xs: '1.3rem', sm: '1.5rem', md: '2rem' },
-          fontWeight: 700,
-          color: 'white',
-          textAlign: 'center',
-          textTransform: 'uppercase',
-          letterSpacing: '2px',
-          margin: '0 0 20px 0',
-          fontFamily: 'system-ui, -apple-system, sans-serif',
-        }}
-      >
-        SMILEBLOOM
-      </Typography>
-      
-      <WelcomeSection>
-        <WelcomeText>
-          <WelcomeLine>Welcome!</WelcomeLine>
-          <WelcomeLine>น้อง...และผู้ ปกครอง</WelcomeLine>
-        </WelcomeText>
+    <>
+      <DashboardHeaderContainer>
+        <Typography
+          sx={{
+            fontSize: { xs: '1.3rem', sm: '1.5rem', md: '2rem' },
+            fontWeight: 700,
+            color: 'white',
+            textAlign: 'center',
+            textTransform: 'uppercase',
+            letterSpacing: '2px',
+            margin: '0 0 20px 0',
+            fontFamily: 'system-ui, -apple-system, sans-serif',
+          }}
+        >
+          SMILEBLOOM
+        </Typography>
         
-        <HeaderIcons direction="row" spacing={1.5}>
-          <Box sx={{ '& svg': { width: { xs: '30px', md: '35px' }, height: { xs: '30px', md: '35px' } } }}>
-            <BookIcon />
-          </Box>
-          <Box sx={{ '& svg': { width: { xs: '35px', md: '40px' }, height: { xs: '35px', md: '40px' } } }}>
-            <ToothIcon />
-          </Box>
-        </HeaderIcons>
-      </WelcomeSection>
+        <WelcomeSection>
+          <WelcomeText>
+            <WelcomeLine>Welcome!</WelcomeLine>
+            <WelcomeLine>น้อง...และผู้ ปกครอง</WelcomeLine>
+          </WelcomeText>
+          
+          <HeaderIcons direction="row" spacing={1.5}>
+            <IconButton
+              onClick={handleOpenIntro}
+              sx={{
+                padding: '8px',
+                color: 'white',
+                '&:hover': {
+                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                },
+                '& svg': { 
+                  width: { xs: '30px', md: '35px' }, 
+                  height: { xs: '30px', md: '35px' } 
+                }
+              }}
+            >
+              <BookIcon />
+            </IconButton>
+            <IconButton
+              onClick={handleOpenIntro}
+              sx={{
+                padding: '8px',
+                color: 'white',
+                '&:hover': {
+                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                },
+                '& svg': { 
+                  width: { xs: '35px', md: '40px' }, 
+                  height: { xs: '35px', md: '40px' } 
+                }
+              }}
+            >
+              <ToothIcon />
+            </IconButton>
+          </HeaderIcons>
+        </WelcomeSection>
       
       <Box sx={{ position: 'relative', zIndex: 2, marginTop: '10px' }}>
         <Box sx={{ 
@@ -236,7 +275,22 @@ export const DashboardHeader = ({ age = null }) => {
         </Box>
       </Box>
     </DashboardHeaderContainer>
+
+    <Dialog
+      open={openIntro}
+      onClose={handleCloseIntro}
+      maxWidth="md"
+      fullWidth
+      PaperProps={{
+        sx: {
+          borderRadius: '20px',
+          padding: '30px',
+          backgroundColor: '#f5f5f5',
+        }
+      }}
+    >
+      <Intro onClose={handleCloseIntro} />
+    </Dialog>
+    </>
   )
 }
-
-export default HeaderSection
