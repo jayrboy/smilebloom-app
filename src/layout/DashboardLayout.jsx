@@ -10,6 +10,7 @@ const DashboardContainer = styled(Box)({
   backgroundColor: colors.mintBackground,
   fontFamily: fonts.system,
   padding: 0,
+  paddingBottom: 'calc(96px + env(safe-area-inset-bottom))',
   margin: 0,
   overflowX: 'hidden',
   overflowY: 'auto',
@@ -40,7 +41,7 @@ export const DashboardContentBlock = styled(Box)({
   },
   '@media (max-width: 480px)': {
     margin: '10px',
-    marginBottom: '90px',
+    marginBottom: '10px',
     padding: '20px 15px',
   },
 })

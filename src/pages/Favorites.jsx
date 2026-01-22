@@ -262,7 +262,7 @@ const Favorites = () => {
 
   return (
     <DashboardLayout header={<DashboardHeader userName={user?.name} />}>
-      <DashboardContentBlock sx={{ marginBottom: { xs: '90px', sm: '100px', md: '100px' } }}>
+      <DashboardContentBlock>
         <DashboardSectionTitle>Favorites</DashboardSectionTitle>
 
         {favorites.length > 0 ? (

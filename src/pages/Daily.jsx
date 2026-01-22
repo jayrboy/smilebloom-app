@@ -252,7 +252,7 @@ const Daily = () => {
 
   return (
     <DashboardLayout header={<HeaderSection />}>
-      <DashboardContentBlock sx={{ marginBottom: '100px' }}>
+      <DashboardContentBlock>
         <DashboardSectionTitle>Daily Diary</DashboardSectionTitle>
 
         <Box
