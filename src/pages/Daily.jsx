@@ -1,51 +1,12 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Box, Typography, TextField, Button, Paper } from '@mui/material'
 import { styled } from '@mui/material/styles'
-import { HeaderSection } from './HeaderSection'
-import MobileAppBar from '../layout/MobileAppBar'
-import { getCurrentUser } from '../utils/localStorage'
+import { HeaderSection } from '../components/HeaderSection'
+import DashboardLayout, {
+  DashboardContentBlock,
+  DashboardSectionTitle,
+} from '../layout/DashboardLayout'
 import tooths from '../assets/tooths.png'
-
-const DashboardContainer = styled(Box)({
-  position: 'relative',
-  width: '100%',
-  minHeight: '100vh',
-  backgroundColor: '#E8F5E9',
-  fontFamily: 'system-ui, -apple-system, sans-serif',
-  padding: 0,
-  margin: 0,
-  overflowX: 'hidden',
-  overflowY: 'auto',
-})
-
-const DottedBorder = styled(Box)({
-  position: 'absolute',
-  left: 0,
-  right: 0,
-  height: '3px',
-  backgroundImage: 'radial-gradient(circle, #FFCDD2 2px, transparent 2px)',
-  backgroundSize: '12px 3px',
-  backgroundRepeat: 'repeat-x',
-  zIndex: 10,
-})
-
-const ContentBlock = styled(Box)({
-  backgroundColor: '#1a4d4d',
-  borderRadius: '25px',
-  padding: '25px 20px',
-  margin: '20px',
-  minHeight: '300px',
-  '@media (max-width: 768px)': {
-    margin: '15px',
-    marginBottom: '90px',
-    minHeight: '250px',
-  },
-  '@media (max-width: 480px)': {
-    margin: '10px',
-    marginBottom: '90px',
-    padding: '20px 15px',
-  },
-})
 
 // Tooth positions (percentage-based for responsiveness)
 // Format: { id, name, top, left, width, height }
@@ -226,42 +187,34 @@ const SaveButton = styled(Button)({
 })
 
 const Daily = () => {
-  const [user, setUser] = useState(null)
   const [selectedTooth, setSelectedTooth] = useState(null)
-  const [toothData, setToothData] = useState({})
+  const [toothData, setToothData] = useState(() => {
+    const savedData = localStorage.getItem('toothData')
+    if (!savedData) return {}
+    try {
+      return JSON.parse(savedData)
+    } catch (e) {
+      console.error('Error loading tooth data:', e)
+      return {}
+    }
+  })
   const [formData, setFormData] = useState({
     toothNumber: '',
     eruptionDate: '',
     notes: '',
   })
 
-  useEffect(() => {
-    const currentUser = getCurrentUser()
-    if (currentUser) {
-      setUser(currentUser)
-    }
-    // Load saved tooth data from localStorage
-    const savedData = localStorage.getItem('toothData')
-    if (savedData) {
-      try {
-        setToothData(JSON.parse(savedData))
-      } catch (e) {
-        console.error('Error loading tooth data:', e)
-      }
-    }
-  }, [])
-
   const handleToothClick = (tooth, event) => {
     const rect = event.currentTarget.getBoundingClientRect()
     const containerRect = event.currentTarget.closest('[data-tooth-container]')?.getBoundingClientRect()
-    
+
     setSelectedTooth({
       ...tooth,
       clickX: rect.left + rect.width / 2,
       clickY: rect.top + rect.height / 2,
       containerRect,
     })
-    
+
     // Load existing data for this tooth if available
     const existingData = toothData[tooth.id] || {}
     setFormData({
@@ -291,32 +244,17 @@ const Daily = () => {
   }
 
   const handleInputChange = (field, value) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       [field]: value,
     }))
   }
 
   return (
-    <DashboardContainer>
-      <DottedBorder sx={{ top: 0 }} />
-      <DottedBorder sx={{ bottom: 0 }} />
+    <DashboardLayout header={<HeaderSection />}>
+      <DashboardContentBlock sx={{ marginBottom: '100px' }}>
+        <DashboardSectionTitle>Daily Diary</DashboardSectionTitle>
 
-      <HeaderSection />
-
-      <ContentBlock>
-        <Typography
-          sx={{
-            fontSize: { xs: '1.1rem', md: '1.3rem' },
-            color: 'white',
-            margin: '0 0 20px 0',
-            fontFamily: "'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', cursive",
-            fontWeight: 400,
-          }}
-        >
-          Daily Diary
-        </Typography>
-        
         <Box
           sx={{
             display: 'flex',
@@ -353,11 +291,8 @@ const Daily = () => {
             {TOOTH_POSITIONS.map((tooth) => {
               // ตรวจสอบว่าฟันซี่นี้มีข้อมูลใน localStorage หรือไม่
               const toothInfo = toothData[tooth.id]
-              const hasData = toothInfo && (
-                toothInfo.eruptionDate || 
-                toothInfo.notes
-              )
-              
+              const hasData = toothInfo && (toothInfo.eruptionDate || toothInfo.notes)
+
               return (
                 <ClickableTooth
                   key={tooth.id}
@@ -374,7 +309,7 @@ const Daily = () => {
                 />
               )
             })}
-            
+
             {selectedTooth && (
               <Box
                 sx={{
@@ -459,10 +394,8 @@ const Daily = () => {
             )}
           </Box>
         </Box>
-      </ContentBlock>
-
-      <MobileAppBar />
-    </DashboardContainer>
+      </DashboardContentBlock>
+    </DashboardLayout>
   )
 }
 

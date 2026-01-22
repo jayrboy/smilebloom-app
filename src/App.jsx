@@ -1,9 +1,9 @@
 import { Routes, Route } from 'react-router-dom'
-import Home from './components/Home'
-import Form from './components/Form'
-import Dashboard from './components/Dashboard'
-import Daily from './components/Daily'
-import Favorites from './components/Favorites'
+import Home from './pages/Home'
+import Form from './pages/Form'
+import Dashboard from './pages/Dashboard'
+import Daily from './pages/Daily'
+import Favorites from './pages/Favorites'
 
 const App = () => {
   return (

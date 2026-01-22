@@ -1,19 +1,19 @@
 import { useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { 
-  Box, 
-  Typography, 
-  Button, 
-  TextField, 
-  Stack, 
+import {
+  Box,
+  Typography,
+  Button,
+  TextField,
+  Stack,
   Paper,
   Container,
   FormControl,
 } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import DecorativeElements from '../layout/DecorativeElements'
-import { HeaderSection } from './HeaderSection'
-import ContactInfo from './ContactInfo'
+import { HeaderSection } from '../components/HeaderSection'
+import ContactInfo from '../components/ContactInfo'
 import { addUser } from '../utils/localStorage'
 
 const FormContainer = styled(Box)({
@@ -163,7 +163,7 @@ const SubmitButton = styled(Button)(({ theme }) => ({
 const Form = () => {
   const navigate = useNavigate()
   const formRef = useRef(null)
-  
+
   const [formData, setFormData] = useState({
     name: '',
     birthday: '',
@@ -175,10 +175,10 @@ const Form = () => {
   })
 
   const handleChange = (field, value) => {
-    setFormData(prev => ({ ...prev, [field]: value }))
+    setFormData((prev) => ({ ...prev, [field]: value }))
     // Clear error when user starts typing
     if (errors[field]) {
-      setErrors(prev => ({ ...prev, [field]: false }))
+      setErrors((prev) => ({ ...prev, [field]: false }))
     }
   }
 
@@ -193,7 +193,7 @@ const Form = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    
+
     if (validateForm()) {
       const userData = {
         name: formData.name.trim(),
@@ -202,7 +202,7 @@ const Form = () => {
 
       // Save user using utils
       addUser(userData)
-      
+
       navigate('/dashboard')
     }
   }
@@ -248,7 +248,7 @@ const Form = () => {
                 >
                   กรุณากรอกชื่อลูกของคุณ
                 </Typography>
-                
+
                 <FormControl fullWidth error={errors.name} sx={{ marginBottom: 1 }}>
                   <StyledTextField
                     type="text"
@@ -260,10 +260,10 @@ const Form = () => {
                     error={errors.name}
                     helperText={errors.name ? 'Please enter child name' : ''}
                     FormHelperTextProps={{
-                      sx: { 
+                      sx: {
                         color: errors.name ? '#ff6b6b' : 'rgba(255, 255, 255, 0.7)',
                         marginTop: 1,
-                      }
+                      },
                     }}
                   />
                 </FormControl>
@@ -283,7 +283,7 @@ const Form = () => {
                 >
                   กรุณากรอก วัน/เดือน/ปี เกิดลูกของคุณ
                 </Typography>
-                
+
                 <FormControl fullWidth error={errors.birthday} sx={{ marginBottom: 1 }}>
                   <StyledTextField
                     type="date"
@@ -297,19 +297,19 @@ const Form = () => {
                       shrink: true,
                     }}
                     FormHelperTextProps={{
-                      sx: { 
+                      sx: {
                         color: errors.birthday ? '#ff6b6b' : 'rgba(255, 255, 255, 0.7)',
                         marginTop: 1,
-                      }
+                      },
                     }}
                   />
                 </FormControl>
               </SectionBox>
-              
-              <Box 
-                sx={{ 
-                  display: 'flex', 
-                  justifyContent: 'center', 
+
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'center',
                   width: '100%',
                   marginTop: { xs: 4, sm: 5, md: 6 },
                   paddingTop: { xs: 2, sm: 3 },

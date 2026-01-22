@@ -19,12 +19,14 @@ const NavBar = styled(Box)({
   borderTop: '1px solid rgba(26, 77, 77, 0.1)',
 })
 
-const NavButton = styled(IconButton)(({ isActive }) => ({
+const NavButton = styled(IconButton, {
+  shouldForwardProp: (prop) => prop !== 'isActive',
+})(({ isActive, theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  width: { xs: '64px', md: '70px' },
-  height: { xs: '64px', md: '70px' },
+  width: '64px',
+  height: '64px',
   borderRadius: '16px',
   backgroundColor: isActive ? '#1a4d4d' : 'transparent',
   border: 'none',
@@ -39,9 +41,17 @@ const NavButton = styled(IconButton)(({ isActive }) => ({
     transform: 'translateY(0) scale(0.95)',
   },
   '& svg': {
-    width: { xs: '28px', md: '32px' },
-    height: { xs: '28px', md: '32px' },
+    width: '28px',
+    height: '28px',
     transition: 'all 0.3s ease',
+  },
+  [theme.breakpoints.up('md')]: {
+    width: '70px',
+    height: '70px',
+    '& svg': {
+      width: '32px',
+      height: '32px',
+    },
   },
   ...(isActive && {
     '&::before': {

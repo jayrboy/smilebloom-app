@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom'
 import { Box, Typography, Button } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import DecorativeElements from '../layout/DecorativeElements'
-import ContactInfo from './ContactInfo'
-import { HomeIcon } from './Icons'
+import ContactInfo from '../components/ContactInfo'
+import { HomeIcon } from '../components/Icons'
 
 const HomeContainer = styled(Box)({
   position: 'fixed',
