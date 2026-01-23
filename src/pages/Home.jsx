@@ -1,9 +1,11 @@
-import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { Box, Typography, Button } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import DecorativeElements from '../layout/DecorativeElements'
 import ContactInfo from '../components/ContactInfo'
 import { HomeIcon } from '../components/Icons'
+import { getCurrentUser } from '../utils/localStorage'
 
 const HomeContainer = styled(Box)({
   position: 'fixed',
@@ -98,6 +100,15 @@ const StartButton = styled(Button)({
 
 const Home = () => {
   const content = 'เว็บไซต์ที่ช่วยบันทึกการเจริญเติบโตของฟันและสุขภาพฟัน เพื่อคุณแม่และคุณหนู'
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const user = getCurrentUser()
+    if (user) {
+      navigate('/dashboard')
+    }
+  }, [navigate])
+
   return (
     <HomeContainer>
       <DecorativeElements variant="home" />

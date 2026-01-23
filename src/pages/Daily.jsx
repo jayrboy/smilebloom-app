@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Box, Typography, TextField, Button, Paper } from '@mui/material'
+import { Box, Typography, TextField, Button, Paper, IconButton } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import { HeaderSection } from '../components/HeaderSection'
 import DashboardLayout, {
@@ -171,7 +171,7 @@ const StyledTextField = styled(TextField)({
   },
 })
 
-const SaveButton = styled(Button)({
+const StyledButton = styled(Button)({
   backgroundColor: '#1a4d4d',
   color: 'white',
   borderRadius: '8px',
@@ -248,6 +248,16 @@ const Daily = () => {
       ...prev,
       [field]: value,
     }))
+  }
+  
+  const handleDelete = () => {
+    if (selectedTooth) {
+      const newToothData = { ...toothData }
+      delete newToothData[selectedTooth.id]
+      setToothData(newToothData)
+      localStorage.setItem('toothData', JSON.stringify(newToothData))
+      handleCloseBubble()
+    }
   }
 
   return (
@@ -384,10 +394,13 @@ const Daily = () => {
                     rows={2}
                   />
 
-                  <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '8px' }}>
-                    <SaveButton onClick={handleSave} variant="contained" size="small">
+                  <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '8px', gap: '8px' }}>
+                    <StyledButton onClick={handleSave} variant="contained" size="small">
                       บันทึก
-                    </SaveButton>
+                    </StyledButton>
+                    <StyledButton onClick={handleDelete} variant="contained" size="small">
+                      ลบ
+                    </StyledButton>
                   </Box>
                 </SpeechBubble>
               </Box>
