@@ -10,7 +10,6 @@ const DashboardContainer = styled(Box)({
   backgroundColor: colors.mintBackground,
   fontFamily: fonts.system,
   padding: 0,
-  paddingBottom: 'calc(96px + env(safe-area-inset-bottom))',
   margin: 0,
   overflowX: 'hidden',
   overflowY: 'auto',

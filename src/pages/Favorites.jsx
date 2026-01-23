@@ -195,7 +195,7 @@ const Favorites = () => {
             else if (tooth.eruptionDate) {
               const eruptionDate = new Date(tooth.eruptionDate)
               const nextApptDate = new Date(eruptionDate)
-              nextApptDate.setMonth(nextApptDate.getMonth() + 6)
+              nextApptDate.setMonth(nextApptDate.getMonth())
               appointments.push({
                 date: nextApptDate.toISOString().split('T')[0],
                 toothId: toothId,
@@ -208,8 +208,6 @@ const Favorites = () => {
 
           // Find all future appointments
           const today = new Date()
-          today.setHours(0, 0, 0, 0)
-
           const futureAppointments = appointments
             .map((apt) => ({
               ...apt,
